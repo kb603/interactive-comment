@@ -106,9 +106,9 @@ const Comment = ({
 
   return (
     <div className="mb-4 rounded-lg bg-white p-4 shadow-md">
-      <div className="flex items-start space-x-4">
+      <div className="flex flex-col items-start space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
         {/* Voting Section */}
-        <div className="flex flex-col items-center rounded-lg bg-gray-100 p-2">
+        <div className="flex flex-row items-center gap-2 rounded-lg bg-gray-100 p-2 sm:flex-col">
           <button
             onClick={() => onUpvote(comment.id)}
             className="mb-2 text-gray-500 hover:text-blue-600"
@@ -126,7 +126,7 @@ const Comment = ({
 
         {/* Comment Content */}
         <div className="flex-grow">
-          <div className="mb-3 flex items-center justify-between">
+          <div className="mb-3 flex flex-col items-start justify-between sm:flex-row sm:items-center">
             <div className="flex items-center space-x-3">
               <img
                 src={comment.user.image.png}
@@ -143,7 +143,7 @@ const Comment = ({
             </div>
 
             {/* Action Buttons */}
-            <div className="flex items-center space-x-2">
+            <div className="mt-2 flex items-center space-x-2 sm:mt-0">
               {comment.user.username === currentUser.username ? (
                 <>
                   <button
@@ -194,7 +194,7 @@ const Comment = ({
 
       {/* Reply Input */}
       {isReplying && (
-        <div className="mt-4 flex items-start space-x-4 pl-16">
+        <div className="mt-4 flex items-start space-x-4 pl-4 sm:pl-16">
           <img
             src={currentUser.image.png}
             alt={currentUser.username}
@@ -220,7 +220,7 @@ const Comment = ({
 
       {/* Replies */}
       {comment.replies && comment.replies.length > 0 && (
-        <div className="mt-4 border-l-2 border-gray-200 pl-16">
+        <div className="mt-4 border-l-2 border-gray-200 pl-4 sm:pl-16">
           {comment.replies.map((reply) => (
             <Comment
               key={reply.id}
@@ -441,19 +441,19 @@ const CommentsSection = () => {
       ))}
 
       {/* New Comment Input */}
-      <div className="mt-4 flex items-start space-x-4 rounded-lg bg-white p-4 shadow-sm">
-        <img
-          src={currentUser.image?.png}
-          alt={currentUser.username}
-          className="h-10 w-10 rounded-full"
+      <div className="mt-4 flex flex-col space-y-4 rounded-lg bg-white p-4 shadow-sm sm:space-y-0">
+        <textarea
+          value={newCommentText}
+          onChange={(e) => setNewCommentText(e.target.value)}
+          placeholder="Add a comment..."
+          className="w-full rounded border p-2"
+          rows={3}
         />
-        <div className="flex-grow">
-          <textarea
-            value={newCommentText}
-            onChange={(e) => setNewCommentText(e.target.value)}
-            placeholder="Add a comment..."
-            className="mb-2 w-full rounded border p-2"
-            rows={3}
+        <div className="flex items-center justify-between">
+          <img
+            src={currentUser.image?.png}
+            alt={currentUser.username}
+            className="h-10 w-10 rounded-full"
           />
           <button
             onClick={addComment}
