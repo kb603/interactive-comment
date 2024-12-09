@@ -105,20 +105,20 @@ const Comment = ({
   };
 
   return (
-    <div className="bg-white rounded-lg p-4 mb-4 shadow-md">
+    <div className="mb-4 rounded-lg bg-white p-4 shadow-md">
       <div className="flex items-start space-x-4">
         {/* Voting Section */}
-        <div className="flex flex-col items-center bg-gray-100 rounded-lg p-2">
+        <div className="flex flex-col items-center rounded-lg bg-gray-100 p-2">
           <button
             onClick={() => onUpvote(comment.id)}
-            className="text-gray-500 hover:text-blue-600 mb-2"
+            className="mb-2 text-gray-500 hover:text-blue-600"
           >
             <ThumbsUp size={20} />
           </button>
-          <span className="text-blue-600 font-semibold">{comment.score}</span>
+          <span className="font-semibold text-blue-600">{comment.score}</span>
           <button
             onClick={() => onDownvote(comment.id)}
-            className="text-gray-500 hover:text-red-600 mt-2"
+            className="mt-2 text-gray-500 hover:text-red-600"
           >
             <ThumbsDown size={20} />
           </button>
@@ -126,16 +126,16 @@ const Comment = ({
 
         {/* Comment Content */}
         <div className="flex-grow">
-          <div className="flex items-center justify-between mb-3">
+          <div className="mb-3 flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <img
                 src={comment.user.image.png}
                 alt={comment.user.username}
-                className="w-8 h-8 rounded-full"
+                className="h-8 w-8 rounded-full"
               />
               <span className="font-semibold">{comment.user.username}</span>
               {comment.user.username === currentUser.username && (
-                <span className="bg-blue-600 text-white text-xs px-2 py-1 rounded">
+                <span className="rounded bg-blue-600 px-2 py-1 text-xs text-white">
                   you
                 </span>
               )}
@@ -148,13 +148,13 @@ const Comment = ({
                 <>
                   <button
                     onClick={() => setIsEditing(!isEditing)}
-                    className="text-blue-600 hover:text-blue-800 flex items-center"
+                    className="flex items-center text-blue-600 hover:text-blue-800"
                   >
                     <Edit size={16} className="mr-1" /> Edit
                   </button>
                   <button
                     onClick={() => onDelete(comment.id)}
-                    className="text-red-600 hover:text-red-800 flex items-center"
+                    className="flex items-center text-red-600 hover:text-red-800"
                   >
                     <Trash2 size={16} className="mr-1" /> Delete
                   </button>
@@ -162,7 +162,7 @@ const Comment = ({
               ) : (
                 <button
                   onClick={() => setIsReplying(!isReplying)}
-                  className="text-blue-600 hover:text-blue-800 flex items-center"
+                  className="flex items-center text-blue-600 hover:text-blue-800"
                 >
                   <Reply size={16} className="mr-1" /> Reply
                 </button>
@@ -176,12 +176,12 @@ const Comment = ({
               <textarea
                 value={editText}
                 onChange={(e) => setEditText(e.target.value)}
-                className="w-full p-2 border rounded"
+                className="w-full rounded border p-2"
                 rows={3}
               />
               <button
                 onClick={handleEdit}
-                className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 self-end"
+                className="self-end rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
               >
                 Update
               </button>
@@ -194,23 +194,23 @@ const Comment = ({
 
       {/* Reply Input */}
       {isReplying && (
-        <div className="mt-4 pl-16 flex items-start space-x-4">
+        <div className="mt-4 flex items-start space-x-4 pl-16">
           <img
             src={currentUser.image.png}
             alt={currentUser.username}
-            className="w-8 h-8 rounded-full"
+            className="h-8 w-8 rounded-full"
           />
           <div className="flex-grow">
             <textarea
               value={replyText}
               onChange={(e) => setReplyText(e.target.value)}
               placeholder="Add a reply..."
-              className="w-full p-2 border rounded mb-2"
+              className="mb-2 w-full rounded border p-2"
               rows={3}
             />
             <button
               onClick={handleReply}
-              className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+              className="rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
             >
               Reply
             </button>
@@ -220,7 +220,7 @@ const Comment = ({
 
       {/* Replies */}
       {comment.replies && comment.replies.length > 0 && (
-        <div className="mt-4 pl-16 border-l-2 border-gray-200">
+        <div className="mt-4 border-l-2 border-gray-200 pl-16">
           {comment.replies.map((reply) => (
             <Comment
               key={reply.id}
@@ -264,7 +264,7 @@ const CommentsSection = () => {
       setCurrentUser(initialData.currentUser);
       localStorage.setItem(
         "currentUser",
-        JSON.stringify(initialData.currentUser)
+        JSON.stringify(initialData.currentUser),
       );
     } else {
       // Parse and set stored current user
@@ -421,8 +421,8 @@ const CommentsSection = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto py-8 px-4">
-      <h1 className="text-2xl font-bold mb-6 text-center">
+    <div className="mx-auto max-w-2xl px-4 py-8">
+      <h1 className="mb-6 text-center text-2xl font-bold">
         Interactive Comments Section
       </h1>
 
@@ -441,23 +441,23 @@ const CommentsSection = () => {
       ))}
 
       {/* New Comment Input */}
-      <div className="bg-white rounded-lg p-4 shadow-sm mt-4 flex items-start space-x-4">
+      <div className="mt-4 flex items-start space-x-4 rounded-lg bg-white p-4 shadow-sm">
         <img
           src={currentUser.image?.png}
           alt={currentUser.username}
-          className="w-10 h-10 rounded-full"
+          className="h-10 w-10 rounded-full"
         />
         <div className="flex-grow">
           <textarea
             value={newCommentText}
             onChange={(e) => setNewCommentText(e.target.value)}
             placeholder="Add a comment..."
-            className="w-full p-2 border rounded mb-2"
+            className="mb-2 w-full rounded border p-2"
             rows={3}
           />
           <button
             onClick={addComment}
-            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 flex items-center"
+            className="flex items-center rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
           >
             <Send size={16} className="mr-2" /> Send
           </button>
