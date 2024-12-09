@@ -1,17 +1,11 @@
-import { MainComment } from "./components/MainComment";
-import { SubComment } from "./components/SubComment";
-import { TextBox } from "./components/TextBox";
+import CommentsSection from "./components/CommentsSection";
 
-export default function Page() {
+function App() {
   return (
-    <div className="mx-auto max-w-3xl space-y-4 bg-slate-200 p-4 px-10 py-10">
-      <MainComment />
-      <MainComment />
-
-      <SubComment />
-      <SubComment />
-
-      <TextBox />
+    <div className="App">
+      <CommentsSection />
     </div>
   );
 }
+
+export default App;
